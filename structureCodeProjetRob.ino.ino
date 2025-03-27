@@ -11,7 +11,7 @@ uint8_t commande_pince=10;
 1 servomoteur
 2 capteurs distances
 */
-void tournerDroite(){//precisement
+void tournerGauche(){//precisement
 	//peut-etre avec delay (stop le programme pour le temps de la fonction)
 
 }
@@ -79,7 +79,7 @@ void etape1(distance_avant){
 	}
 	if (distance_avant <= seuil)
 	{
-		tournerDroite();
+		tournerGauche();
 		EtatRobot++;
 	}
 	//modifier l'état de la variable etape1 quand fini
@@ -91,7 +91,7 @@ void etape2(){
 
 	if (detecterPlot() == 1)
 	{
-		tournerDroite();
+		tournerGauche();
 		EtatRobot++;
 	}
 
@@ -124,7 +124,7 @@ void etape4(){
 
 	if (detecterPlot() == 1)
 	{
-		tournerDroite();
+		tournerGauche();
 		EtatRobot++;
 	}
 }
