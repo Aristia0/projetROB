@@ -16,7 +16,7 @@ uint8_t commande_pince=10;
 */
 void tournerGauche(){//precisement
 	//peut-etre avec delay (stop le programme pour le temps de la fonction)
-
+	aucunMouvement();
 }
 
 
@@ -79,6 +79,7 @@ void etape1(distance_avant){
 	}
 	else {
 		tournerGauche();
+		EtatRobot ++;
 	}
 }
 
