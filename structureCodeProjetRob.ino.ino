@@ -3,7 +3,7 @@
 //distance pour détecter un mur
 #define seuil 
 //distance pour être parallèle au mur
-#define distance_red 
+#define distance_ref 
 
 // PIN ASSIGNMENT
 uint8_t position_pince=A0;
@@ -132,8 +132,11 @@ void etape4(){
 }
 
 
-void etape5(){
+void etape5(distance_avant){
 	//avancer tout droit jusqu'à trouver le second plot et tourner à gauche
+	if (distance_avant > seuil){
+		
+	}
 	avancer();
 
 	if (detecterPlot() == 1)
