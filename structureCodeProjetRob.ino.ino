@@ -51,11 +51,6 @@ int detecterPlot(distance_cote){
 }
 
 
-void trouverPositionPince(){
-	//peut-etre avec delay (stop le programme pour le temps de la fonction)
-
-}
-
 void saisirObjet(){
 	ouvrirPince();
 	//déplacer la pince en face de l'objet
@@ -72,10 +67,13 @@ void poserObjet(){
 
 
 void etape0(){
+	//état d'initialisation
 	//moteurs à l'arrêt
 	aucunMouvement();
 	//build-in led qui clignote
 	//mettre la pince en position haute 
+	//delay
+	EtatRobot ++;
 }
 
 void etape1(distance_avant){
@@ -104,7 +102,7 @@ void etape2(distance_avant){
 		//si on détecte un plot on tourne à gauche pour être en face de l'objet
 		//et on change d'état
 		tournerGauche();
-		EtatRobot++;
+		EtatRobot ++;
 	}
 	else if ()
 	{
@@ -128,16 +126,9 @@ void etape3(distance_avant){
 }
 
 void etape4(){
-	// prise de l'objet
-	if(trouverPositionPince() == 1){
-		saisirObjet();
-		tournerGauche();
-		EtatRobot++;
-	}
-	else{
-		//recommencer la recherche
-		//peut-etre en reculant d'abord
-	}
+	saisirObjet();
+	tournerGauche();
+	EtatRobot++;
 }
 
 
@@ -160,7 +151,6 @@ void etape6(){
 	if (detecterPlot() == 1)
 	{
 		poserObjet();
-		EtatRobot++;
 	}
 }
 
@@ -175,18 +165,10 @@ void setup(){
 	moteur.attach(commande_pince);
 }
 
+int EtatRobot = 0;
 
 void loop(){
-
-	//bouton poussoir qui reset les variables
-
-	distance_avant;
-	distance_droite;
-
-
-	int EtatRobot = 0;
-
-
+	
 	switch (EtatRobot) : 
 	case 0 :
 		etape0();
