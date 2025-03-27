@@ -38,11 +38,15 @@ void fermerPince(){
 	moteur.write(180);
 }
 
-void detecterPlot(){
+int detecterPlot(distance_cote){
 
-	//seuil de difference > ... 
+	if (distance_cote <= seuil){
+		return 1;
+	}
+	else{
+		return 0;
+	}
 
-	//faire la manoeuvre (tourner à droite)
 
 }
 
@@ -53,12 +57,15 @@ void trouverPositionPince(){
 }
 
 void saisirObjet(){
-
+	ouvrirPince();
+	//déplacer la pince en face de l'objet
+	fermerPince();
+	//lever la pince 
 }
 
 void poserObjet(){
 	//correctement se positionner (vehicule + pince)
-	//lacher
+	ouvrirPince();
 	//se retirer (reculer)
 
 }
