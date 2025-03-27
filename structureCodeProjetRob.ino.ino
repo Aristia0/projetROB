@@ -9,6 +9,9 @@
 uint8_t position_pince=A0;
 uint8_t commande_pince=10;
 
+//Moteur 
+Servo moteur_pince;
+
 /*
 3 moteurs
 1 servomoteur
@@ -31,11 +34,11 @@ void aucunMouvement(){
 }
 
 void ouvrirPrince(){
-	moteur.write(0);
+	moteur_pince.write(0);
 }
 
 void fermerPince(){
-	moteur.write(180);
+	moteur_pince.write(180);
 }
 
 int detecterPlot(distance_cote){
@@ -169,6 +172,14 @@ void setup(){
 }
 
 int EtatRobot = 0;
+
+void setup()
+{
+	pinMode(commande_pince, OUTPUT);
+  	pinMode(position_pince, INPUT);
+  
+  	moteur_pince.attach(commande_pince);
+}
 
 void loop(){
 	
