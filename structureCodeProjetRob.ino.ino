@@ -93,7 +93,6 @@ void etape1(distance_avant){
 
 void etape2(){
 	//avancer tout droit jusqu'à trouver l'objet
-	avancerParallementAuMur();
 
 	if (distance_avant > seuil)
 	{
@@ -102,6 +101,7 @@ void etape2(){
 	else 
 	{
 		//s'assurer que le capteur a détecter l'objet et pas le mur
+		EtatRobot ++;
 	}
 }
 
@@ -109,8 +109,8 @@ void etape3(){
 	// prise de l'objet
 	if(trouverPositionPince() == 1){
 		saisirObjet();
-		//+tourner a gauche
-		//EtatRobot++;
+		tournerGauche();
+		EtatRobot++;
 	}
 	else{
 		//recommencer la recherche
