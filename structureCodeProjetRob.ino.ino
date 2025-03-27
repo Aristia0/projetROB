@@ -1,6 +1,9 @@
 #include <Servo.h>
 
+//distance pour détecter un mur
 #define seuil 
+//distance pour être parallèle au mur
+#define distance_red 
 
 // PIN ASSIGNMENT
 uint8_t position_pince=A0;
@@ -17,7 +20,7 @@ void tournerGauche(){//precisement
 }
 
 
-void avancerParallementAuMur()
+void avancer()
 {
 
 }
@@ -65,17 +68,28 @@ void etape0(){
 	//moteurs à l'arrêt
 	aucunMouvement();
 	//build-in led qui clignote
+	//mettre la pince en position haute 
 }
 
-
 void etape1(distance_avant){
+	//avancer jusqu'à atteindre le mur pour se positionner parallèlement
+	if (distance_avant > distance_ref)
+	{
+		avancer();
+	}
+	else {
+		tournerGauche();
+	}
+}
+
+void etape2(distance_avant){
 	/*
 	avancer jusqu'à trouver premier plot sur sa droite
 	puis tourner à gauche (90deg)
 	*/
 	if (distance_avant > seuil && detecterPlot() == 0)
 	{
-		avancerParallementAuMur();
+		avancer();
 	}
 	else if (detecterPlot() == 1)
 	{
@@ -91,12 +105,12 @@ void etape1(distance_avant){
 	//modifier l'état de la variable etape1 quand fini
 }
 
-void etape2(){
+void etape3(distance_avant){
 	//avancer tout droit jusqu'à trouver l'objet
 
 	if (distance_avant > seuil)
 	{
-		avancerParallementAuMur();
+		avancer();
 	}
 	else 
 	{
@@ -105,7 +119,7 @@ void etape2(){
 	}
 }
 
-void etape3(){
+void etape4(){
 	// prise de l'objet
 	if(trouverPositionPince() == 1){
 		saisirObjet();
@@ -119,9 +133,9 @@ void etape3(){
 }
 
 
-void etape4(){
+void etape5(){
 	//avancer tout droit jusqu'à trouver le second plot et tourner à gauche
-	avancerParallementAuMur();
+	avancer();
 
 	if (detecterPlot() == 1)
 	{
@@ -131,19 +145,15 @@ void etape4(){
 }
 
 
-void etape5(){
+void etape6(){
 	//avancer tout droite jusqu'à trouver le troisième plot et reculer en position pour poser les moteurs
-	avancerParallementAuMur();
+	avancer();
 
 	if (detecterPlot() == 1)
 	{
 		poserObjet();
 		EtatRobot++;
 	}
-}
-
-void etape6(){
-	//se reculer un peu et stopper les moteurs
 }
 
 
