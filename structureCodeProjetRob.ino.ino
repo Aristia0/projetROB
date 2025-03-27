@@ -17,6 +17,17 @@ Servo moteur_pince;
 1 servomoteur
 2 capteurs distances
 */
+
+void vitesseMoteur(double v1, double v2){
+	MOTOR_ID = 1; //moteur gauche
+	sendVelocityCommand((long int)(v1)); 
+	readMotorState();
+	
+	MOTOR_ID = 2; //moteur droit
+	sendVelocityCommand((long int)(v2)); 
+	readMotorState();
+}
+
 void tournerGauche(){//precisement
 	//peut-etre avec delay (stop le programme pour le temps de la fonction)
 	aucunMouvement();
@@ -41,7 +52,7 @@ void fermerPince(){
 	moteur_pince.write(180);
 }
 
-int detecterPlot(distance_cote){
+int detecterPlot(float distance_cote){
 
 	if (distance_cote <= seuil){
 		return 1;
@@ -79,7 +90,7 @@ void etape0(){
 	EtatRobot ++;
 }
 
-void etape1(distance_avant){
+void etape1(float distance_avant){
 	//avancer jusqu'à atteindre le mur pour se positionner parallèlement
 	if (distance_avant > distance_ref)
 	{
@@ -91,7 +102,7 @@ void etape1(distance_avant){
 	}
 }
 
-void etape2(distance_avant){
+void etape2(float distance_avant){
 	/*
 	avancer jusqu'à trouver premier plot sur sa droite
 	puis tourner à gauche (90deg)
@@ -114,7 +125,7 @@ void etape2(distance_avant){
 	//modifier l'état de la variable etape1 quand fini
 }
 
-void etape3(distance_avant){
+void etape3(float distance_avant){
 	//avancer tout droit jusqu'à trouver l'objet
 
 	if (distance_avant > seuil)
@@ -135,7 +146,7 @@ void etape4(){
 }
 
 
-void etape5(distance_avant){
+void etape5(float distance_avant){
 	//avancer tout droit jusqu'à trouver le second plot et tourner à gauche
 	if (distance_avant > seuil){
 		
