@@ -17,13 +17,13 @@ void tournerGauche(){//precisement
 }
 
 
-void avancerParallementAuMur(){
+void avancerParallementAuMur()
+{
 
 }
 
 
 void aucunMouvement(){
-
 
 }
 
@@ -70,56 +70,57 @@ void etape0(){
 
 void etape1(distance_avant){
 	/*
-	avancer jusqu'à une certaine distance 
-	puis tourner à droite (90deg)
+	avancer jusqu'à trouver premier plot sur sa droite
+	puis tourner à gauche (90deg)
 	*/
-	if (distance_avant > seuil)
+	if (distance_avant > seuil && detecterPlot() == 0)
 	{
 		avancerParallementAuMur();
 	}
-	if (distance_avant <= seuil)
+	else if (detecterPlot() == 1)
 	{
+		//si on détecte un plot on tourne à gauche pour être en face de l'objet
+		//et on change d'état
 		tournerGauche();
 		EtatRobot++;
+	}
+	else if ()
+	{
+		//si on a pas détecter de plot et qu'on a atteint la limite du plateau
 	}
 	//modifier l'état de la variable etape1 quand fini
 }
 
 void etape2(){
-	//avancer tout droite jusqu'à trouver le premier plot et tourner à droite
+	//avancer tout droit jusqu'à trouver l'objet
 	avancerParallementAuMur();
 
-	if (detecterPlot() == 1)
+	if (distance_avant > seuil)
 	{
-		tournerGauche();
-		EtatRobot++;
+		avancerParallementAuMur();
 	}
-
+	else 
+	{
+		//s'assurer que le capteur a détecter l'objet et pas le mur
+	}
 }
 
 void etape3(){
-
-	if (distance_avant > seuil){
-		avancerParallementAuMur();
+	// prise de l'objet
+	if(trouverPositionPince() == 1){
+		saisirObjet();
+		//+tourner a gauche
+		//EtatRobot++;
 	}
-	if (distance_avant <= seuil){
-		if(trouverPositionPince() == 1){
-			saisirObjet();
-			//+tourner a droite
-			//EtatRobot++;
-		}
-		else{
-			//recommencer la recherche
-			//peut-etre en reculant d'abord
-		}
-
+	else{
+		//recommencer la recherche
+		//peut-etre en reculant d'abord
 	}
-
 }
 
 
 void etape4(){
-	//avancer tout droite jusqu'à trouver le premier plot et tourner à droite
+	//avancer tout droit jusqu'à trouver le second plot et tourner à gauche
 	avancerParallementAuMur();
 
 	if (detecterPlot() == 1)
@@ -131,7 +132,7 @@ void etape4(){
 
 
 void etape5(){
-	//avancer tout droite jusqu'à trouver le premier plot et tourner à droite
+	//avancer tout droite jusqu'à trouver le troisième plot et reculer en position pour poser les moteurs
 	avancerParallementAuMur();
 
 	if (detecterPlot() == 1)
